@@ -36,7 +36,7 @@ const replaceVariables = (objectToReplace: unknown, variables: Record<string, un
 const replaceEntireProperty = (stringfiedObject: string, variables: Record<string, unknown>) => {
     stringfiedObject = stringfiedObject.replace(/"{{[\w]+}}"/g, (substring: string, ...args: any[]) => {
         const substringWithoutBracesAndComma = substring.substring(3, substring.length-3)
-        return JSON.stringify(variablesToSubstitute[substringWithoutBracesAndComma] ?? removeAllUnescapedCommas(substring))
+        return JSON.stringify(variables[substringWithoutBracesAndComma] ?? removeAllUnescapedCommas(substring))
     })
     return stringfiedObject
 }
@@ -44,7 +44,7 @@ const replaceEntireProperty = (stringfiedObject: string, variables: Record<strin
 const replaceSubstring = (stringfiedObject: string, variables: Record<string, unknown>) => {
     stringfiedObject = stringfiedObject.replace(/{{[\w]+}}/g, (substring: string, ...args: any[]) => {
         const substringWithoutBraces = substring.substring(2, substring.length-2)
-        return removeAllUnescapedCommas(JSON.stringify(variablesToSubstitute[substringWithoutBraces] ?? substring))
+        return removeAllUnescapedCommas(JSON.stringify(variables[substringWithoutBraces] ?? substring))
     })
     return stringfiedObject
 }
