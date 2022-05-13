@@ -25,8 +25,8 @@ const variablesToSubstitute: Record<string, unknown> = {
     lastName: 'this variable exists but wont be used' 
 }
 
-const replaceVariables = (object: unknown, variables: Record<string, unknown>) => {
-    let stringfiedObject = JSON.stringify(object)
+const replaceVariables = (objectToReplace: unknown, variables: Record<string, unknown>) => {
+    let stringfiedObject = JSON.stringify(objectToReplace)
     stringfiedObject = replaceEntireProperty(stringfiedObject, variables)
     stringfiedObject = replaceSubstring(stringfiedObject, variables)
     const result = JSON.parse(stringfiedObject)
