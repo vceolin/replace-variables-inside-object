@@ -1,6 +1,15 @@
 # replace-variables-inside-object
 Made to answer this StackOverflow question: https://stackoverflow.com/questions/72229018/best-way-to-replace-strings-inside-an-javascript-object
 
+First, install the dependencies
+```
+yarn install
+```
+Then just run it with
+```
+yarn start:dev
+```
+
 I have an `unknown` javascript object (let's call it `IncompleteObject` just for readability) and an array of `IVariables` which can be anything, but in the following format:
 ```typescript
 key: string
