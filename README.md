@@ -9,7 +9,8 @@ Then just run it with
 ```
 yarn start:dev
 ```
-
+------------------------
+## Best way to replace strings inside an JavaScript object
 I have an `unknown` javascript object (let's call it `IncompleteObject` just for readability) and an array of `IVariables` which can be anything, but in the following format:
 ```typescript
 key: string
