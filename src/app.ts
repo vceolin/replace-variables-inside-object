@@ -3,26 +3,37 @@ const incompleteObject = {
     JustTheObject: "{{someObject}}",
     JustTheString: "{{name}}",
     IntegerValue: "{{integer}}",
-    StringInsideOtherString: "Bla bla bla {{name}}",
+    StringInsideOtherString: "Bla bla bla {{integer}}",
     ObjectInsideString: "The acronym is {{name}}",
-    VariableThatDoesntExist: "{{thisdoesntexist}}",
     ArrayToTestNestedStuff: [
         {
             JustTheObject: "{{someObject}}",
-            JustTheString: "{{name}}"
+            JustTheString: "{{name}}",
+            MoreNestedStuff: [
+                "{{name}}",
+                "{{someObject}}",
+                {
+                    data: "{{date}}"
+                }
+            ]
         },
         {
             JustTheObject: "{{someObject}}",
-            JustTheString: "{{name}}"
+            JustTheString: "{{name}}",
+            Array: "{{list}}"
         }
     ]
 }
 
-const variablesToSubstitute: Record<string, unknown> = {
+const variablesToReplace: Record<string, unknown> = {
     someObject: { some:'value' },
     name: 'another value',
     integer: 2,
-    lastName: 'this variable exists but wont be used' 
+    lastName: 'this variable exists but wont be used',
+    date: new Date(),
+    list: [
+        2, 3, 4, 5
+    ]
 }
 
 const replaceVariables = (objectToReplace: unknown, variables: Record<string, unknown>) => {
@@ -51,11 +62,11 @@ const replaceSubstring = (stringfiedObject: string, variables: Record<string, un
 
 const removeAllUnescapedCommas = (stringToUnescape: string) => {
     return stringToUnescape.replace(/(?<!\\)\"/g, "")
-} 
+}
 
 console.log(`*****BEFORE*****`, JSON.stringify(incompleteObject, null, 2))
 
-const result = replaceVariables(incompleteObject, variablesToSubstitute)
+const result = replaceVariables(incompleteObject, variablesToReplace)
 
 console.log(JSON.stringify(result, undefined, 2))
 console.log(`*****AFTER*****`, JSON.stringify(result, null, 2))
